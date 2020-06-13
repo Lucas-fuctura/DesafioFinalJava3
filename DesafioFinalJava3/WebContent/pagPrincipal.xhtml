@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<ui:composition template="templatePrincipal.xhtml">
+		<ui:define name="conteudo">
+			<p:panelGrid style="width:100%; border: 1px solid;">
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Materia: "/>
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{MateriaBean.materia.nome}" style="width:100%"/>
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Profº: "/>
+					</p:column>
+					<p:column>
+						<p:inputText value="#{MateriaBean.materia.professor}" style="width:100%"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="6">
+						<p:commandButton value="Salvar" actionListener="#{MateriaBean.salvarMateria}" update="@form"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="6">
+						<p:outputLabel value="Atividades"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Tipo de Atividade:" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{MateriaBean.atvMateria.tipo}"/>
+					</p:column>
+					<p:column>
+						<p:outputLabel value="Pontuação:" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText value="#{MateriaBean.atvMateria.pontuacao}"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="1">
+						<p:outputLabel value="Data de Entrega:"/>
+					</p:column>
+					<p:column colspan="4">
+						<p:calendar value="#{MateriaBean.atvMateria.dataEntrega}" showOn="button"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="6">
+						<p:outputLabel value="Detalhes"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="6">
+						<p:inputTextarea value="#{MateriaBean.atvMateria.detalhes}" style="width:100%"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column colspan="6">
+						<p:commandButton value="Add" actionListener="#{MateriaBean.adicionarAtv}" update="@form"/>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
+			<p:panel header="Lista de Atividades" style="margin-bottom:10px">
+				<p:dataTable var="atividades" value="#{MateriaBean.materia.atividades}">
+				<p:column headerText="Tipo">
+					<h:outputText value="#{atividades.tipo}" />
+				</p:column>
+
+				<p:column headerText="Pontuação">
+					<h:outputText value="#{atividades.pontuacao}" />
+				</p:column>
+
+				<p:column headerText="Data de Entrega">
+					<h:outputText value="#{atividades.dataEntrega}" />
+				</p:column>
+
+				<p:column headerText="">
+					<p:commandButton value="Remover" action="#{MateriaBean.removerAtv}">
+						<f:setPropertyActionListener
+							target="#{MateriaBean.atvSelecionado}"
+							value="#{atividades.tipo}" />
+					</p:commandButton>
+
+				</p:column>
+			</p:dataTable>
+
+		</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

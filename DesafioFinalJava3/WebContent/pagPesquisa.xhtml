@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<ui:composition template="templatePrincipal.xhtml">
+		<ui:define name="conteudo">
+		<p:panel style="border: 1px solid">
+			<p:outputLabel value="Matéria: "/>
+			<p:inputText value="#{MateriaBean.txtPesquisa}" style="Margin-left:5px; width:72%"/>
+			<p:commandButton value="Pesquisar" actionListener="#{MateriaBean.pesquisarMateria}" style="Margin-left:5px"/>
+			<p/>
+			<p:panel style="margin-bottom:10px">
+				<p:dataTable var="materias" value="#{MateriaBean.materia}">
+				<p:column headerText="Materia">
+					<h:outputText value="#{materia.nome}" />
+				</p:column>
+
+				<p:column headerText="Professor">
+					<h:outputText value="#{materia.professor}" />
+				</p:column>
+				</p:dataTable>
+			</p:panel>
+			</p:panel>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

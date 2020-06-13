@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+		<table style="border: 2px solid; width: 100%">
+			<tr>
+				<td colspan="2" align="center">
+					<ui:insert name="cabecalho">
+						<h1>Escola Java 3</h1>
+					</ui:insert>
+				</td>
+			</tr>
+			<tr>
+				<td style="width:15%; border:1px solid">
+					<ui:insert name="menu">
+						<p:commandLink value="Meus Dados" onclick="PF('meusDados').show()"/>
+						<p/>
+						<p:commandLink value="Home" action="#{MateriaBean.pagPrincipal}"/>
+						<p/>
+						<p:commandLink value="Pesquisar" action="#{MateriaBean.pagPesquisa}"/>
+					</ui:insert>
+				</td>
+				<td>
+					<ui:insert name="conteudo">
+						Conteudo da Pagina
+					</ui:insert>
+				</td>
+			</tr>
+		</table>
+		<p:dialog header="Meus Dados" visible="false" modal="true" widgetVar="meusDados">
+			<f:metadata>
+			    <f:viewAction action="#{MateriaBean.atualizarEstudanteLogado}" />
+			</f:metadata>
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Estudante:"/>
+				<h:outputText value="#{MateriaBean.estudanteLogado.nome}"/>
+				<p:outputLabel value="Nº de Matrícula:"/>
+				<h:outputText value="#{MateriaBean.estudanteLogado.matricula}"/>
+				<p:outputLabel value="Turno:"/>
+				<h:outputText value="#{MateriaBean.estudanteLogado.turno}"/>
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

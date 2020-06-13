@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+	<h:form>
+	 <p:growl showDetail="true" sticky="true" /> 
+		<p:panel header="Login" visible="true" style="width:50%; margin: 0 auto">
+			<p:panelGrid columns="2" style="width:100%">
+				<p:outputLabel value="Matricula: "/>
+				<p:inputText value="#{LoginBean.txtMatricula}" style="width:100%"/>
+				<p:outputLabel value="Senha: "/>
+				<p:password value="#{LoginBean.txtSenha}" style="width:100%"/>
+			</p:panelGrid>
+				<p:commandLink value="Criar Conta" onclick="PF('criarConta').show();" style="color: blue; font-size: 14px"/>
+				<p:commandButton value="Entrar" action="#{LoginBean.entrar}" update="@form" style="margin-top: 5px; margin-left: 60%"/>
+		</p:panel>
+		
+		<p:dialog header="Criar Conta" modal="true" visible="false" widgetVar="criarConta">
+			<p:panelGrid columns="2" style="width:100%">
+				<p:outputLabel value="Nome: "/>
+				<p:inputText value="#{LoginBean.estudante.nome}" style="width:100%"/>
+				<p:outputLabel value="Matricula: "/>
+				<p:inputText value="#{LoginBean.estudante.matricula}" style="width:100%"/>	
+				<p:outputLabel value="Senha: "/>
+				<p:password value="#{LoginBean.estudante.senha}" style="width:100%"/>
+				<p:outputLabel value="Turno: "/>
+				<p:selectOneRadio value="#{LoginBean.estudante.turno}" unselectable="true">
+		            <f:selectItem itemLabel="Manhã" itemValue="Manha" />
+		            <f:selectItem itemLabel="Tarde" itemValue="Tarde" />
+		            <f:selectItem itemLabel="Noite" itemValue="Noite" />
+        		</p:selectOneRadio>	
+			</p:panelGrid>
+				<p:commandButton value="Salvar" actionListener="#{LoginBean.salvar}" update="@form" style="margin-top: 5px; margin-left: 70%"/>
+		</p:dialog>
+	
+	</h:form>
+</h:body>
+
+</html>
